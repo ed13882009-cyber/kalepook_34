@@ -1,0 +1,419 @@
+/* ==========================================================================
+   سه چهار کله پوک - استایل اختصاصی
+   Theme: Dark Purple & Neon Violet (#1a0033 -> #2d0a4e -> #0f0524)
+   Font: Vazirmatn (Google Fonts)
+   Direction: RTL
+   ========================================================================== */
+
+:root {
+  --bg-top: #1a0033;
+  --bg-mid: #2d0a4e;
+  --bg-bottom: #0f0524;
+  --neon-purple: #a855f7;
+  --neon-violet: #c084fc;
+  --neon-fuchsia: #e879f9;
+  --text-white: #ffffff;
+  --text-soft: #d8c9f0;
+  --text-faded: #9d8bb8;
+  --gold-start: #f7971e;
+  --gold-end: #ffd200;
+  --glass-bg: rgba(33, 10, 56, 0.58);
+  --glass-border: rgba(192, 132, 252, 0.28);
+  --glass-glow: rgba(168, 85, 247, 0.18);
+  --font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-family);
+  direction: rtl;
+  scroll-behavior: smooth;
+  background-color: var(--bg-bottom);
+  color: var(--text-soft);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient glow accents in background */
+body::before {
+  content: "";
+  position: fixed;
+  top: -150px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(232, 121, 249, 0.05) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   1. HEADER SECTION (100vh)
+   ========================================================================== */
+.header-hero {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 20px;
+  z-index: 2;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.main-title {
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--neon-fuchsia) 40%, var(--neon-violet) 75%, var(--neon-purple) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 28px rgba(232, 121, 249, 0.5));
+  animation: titleFadeDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.subtitle {
+  font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+  font-weight: 400;
+  color: var(--text-soft);
+  text-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+  opacity: 0;
+  animation: subtitleFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+/* Bouncing neon purple arrow */
+.scroll-indicator {
+  position: absolute;
+  bottom: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  color: var(--neon-violet);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50%;
+  transition: color 0.3s ease, transform 0.3s ease;
+  animation: arrowBounce 2.2s infinite ease-in-out;
+  text-decoration: none;
+  filter: drop-shadow(0 0 10px var(--neon-purple));
+}
+
+.scroll-indicator:hover {
+  color: var(--neon-fuchsia);
+  filter: drop-shadow(0 0 16px var(--neon-fuchsia));
+}
+
+.scroll-indicator svg {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+/* ==========================================================================
+   2. SEVEN CARDS SECTION
+   ========================================================================== */
+.cards-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 20px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 32px 38px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px var(--glass-glow);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  will-change: opacity, transform;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  border-color: rgba(232, 121, 249, 0.45);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 35px rgba(192, 132, 252, 0.28);
+}
+
+/* Card Content: Text on the left, right-aligned */
+.card-content {
+  flex: 1;
+  text-align: right;
+}
+
+/* Name Styles */
+.card-name {
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+/* White name default for all friends */
+.name-white {
+  color: var(--text-white);
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.25);
+}
+
+/* Golden name exclusively for عماد */
+.name-golden {
+  background: linear-gradient(135deg, var(--gold-start) 0%, var(--gold-end) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(247, 151, 30, 0.5));
+  display: inline-block;
+}
+
+/* Description Text */
+.card-description {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--text-soft);
+  font-weight: 400;
+  word-break: break-word;
+}
+
+/* Circular Avatar */
+.card-avatar {
+  width: 180px;
+  height: 180px;
+  min-width: 180px;
+  min-height: 180px;
+  border-radius: 50%;
+  border: 3.5px solid var(--neon-violet);
+  box-shadow: 0 0 28px rgba(192, 132, 252, 0.65), 0 0 55px rgba(168, 85, 247, 0.35);
+  overflow: hidden;
+  position: relative;
+  background-color: rgba(22, 6, 38, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.card:hover .card-avatar {
+  border-color: var(--neon-fuchsia);
+  box-shadow: 0 0 35px rgba(232, 121, 249, 0.8), 0 0 65px rgba(192, 132, 252, 0.45);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Images scale up and slightly rotate on hover */
+.card:hover .card-img {
+  transform: scale(1.08) rotate(3deg);
+}
+
+/* ==========================================================================
+   3. FOOTER SECTION
+   ========================================================================== */
+.site-footer {
+  text-align: center;
+  padding: 60px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 5, 36, 0.7) 100%);
+}
+
+.footer-line-1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  text-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
+}
+
+.footer-line-2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--neon-violet);
+  letter-spacing: 1px;
+}
+
+.footer-line-3 {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-faded);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.footer-line-4 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-faded);
+  margin-top: 4px;
+}
+
+.footer-creator-highlight {
+  background: linear-gradient(135deg, var(--gold-start) 0%, var(--gold-end) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+  filter: drop-shadow(0 1px 6px rgba(247, 151, 30, 0.4));
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes titleFadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-35px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtitleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}
+
+@keyframes arrowBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translate(-50%, 0);
+  }
+  40% {
+    transform: translate(-50%, -14px);
+  }
+  60% {
+    transform: translate(-50%, -7px);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 720px) {
+  .cards-container {
+    padding: 10px 16px 80px;
+    gap: 28px;
+  }
+
+  .card {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 28px 20px;
+    gap: 22px;
+  }
+
+  .card-content {
+    text-align: center;
+  }
+
+  .card-avatar {
+    width: 150px;
+    height: 150px;
+    min-width: 150px;
+    min-height: 150px;
+  }
+
+  .card-name {
+    font-size: 1.65rem;
+  }
+
+  .card-description {
+    font-size: 0.94rem;
+    line-height: 1.8;
+  }
+
+  .main-title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
